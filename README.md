@@ -11,6 +11,7 @@ RFID 태그 UID로 제품과 목적지 상자를 조회하고, 비전 검출과 
 | 모듈 | 역할 |
 |---|---|
 | `rfid_scanner.py` | 태그 식별값 수집 |
+| `rfid_power.py` | 리더기 절전 설정 조회·해제·기본값 복원 |
 | `database.py` | SQLite 제품 매핑 및 작업 큐 |
 | `api_server.py` | 제품 조회 REST API와 WebSocket 알림 |
 | `vision.py` | YOLO 클래스 매칭과 카메라 좌표 변환 |
@@ -37,6 +38,18 @@ API 서버 실행:
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn api_server:app --host 127.0.0.1 --port 8000 --workers 1
 ```
+
+**리더기 절전 설정**
+
+지원 리더기의 전원과 USB/BLE 연결을 확인한 뒤 실행합니다. 기본 실행은 조회이며 `--no-sleep`이 절전을 해제합니다.
+
+```powershell
+.\.venv\Scripts\python.exe rfid_power.py
+.\.venv\Scripts\python.exe rfid_power.py --no-sleep
+```
+
+USB와 BLE 가상 리더가 함께 표시되면 `--reader "PICC 리더 이름 일부"`로 하나를 선택하세요.
+자세한 사용법과 검증 범위는 [절전 해제 안내](robot_rfid/README.md#리더기-절전-설정)에 있습니다.
 
 **[상세 설치·실행 안내](robot_rfid/README.md)** · **[소스 코드](robot_rfid/)** · **[이슈](https://github.com/vision-picking-robot/rfid-pick-and-place/issues)**
 
